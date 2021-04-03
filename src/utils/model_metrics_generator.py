@@ -26,7 +26,7 @@ class ModelMetricsGenerator:
 
     def print_results(self):
         self.print_metrics()
-        #self.print_confusion_matrix()
+        # self.print_confusion_matrix()
 
     def print_metrics(self):
         self.print_accuracy()
@@ -38,8 +38,8 @@ class ModelMetricsGenerator:
         self.print_predict_time()
 
     def print_accuracy(self):
-        #print(self._test_truth.shape)
-        #print(self._predicted.shape)
+        # print(self._test_truth.shape)
+        # print(self._predicted.shape)
         accuracy = accuracy_score(self._test_truth, self._predicted, normalize=True)
         print(f'Accuracy: {accuracy}')
 
@@ -52,8 +52,8 @@ class ModelMetricsGenerator:
         print(f'Recall: {recall}')
 
     def print_specifity(self):
-        recall = recall_score(self._test_truth, self._predicted, pos_label=0)
-        print(f'Specifity: {recall}')
+        specifity = recall_score(self._test_truth, self._predicted, pos_label=0)
+        print(f'Specifity: {specifity}')
 
     def print_f2_score(self):
         f2_score = fbeta_score(self._test_truth, self._predicted, beta=2)

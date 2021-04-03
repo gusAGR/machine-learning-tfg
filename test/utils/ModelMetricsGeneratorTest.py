@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 
-from src.utils.ModelMetricsGenerator import ModelMetricsGenerator
+from src.utils.model_metrics_generator import ModelMetricsGenerator
 
 
 class TestModelMetricsGenerator(TestCase):
@@ -36,9 +36,6 @@ class TestModelMetricsGenerator(TestCase):
         metric_generator = ModelMetricsGenerator(test_truth)
         metric_generator.generate_metrics(model, train_data, train_truth, test_data)
         metric_generator.print_results()
-
-
-
 
     if __name__ == '__main__':
         unittest.main()
