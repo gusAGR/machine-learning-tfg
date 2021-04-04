@@ -8,7 +8,7 @@ class TestModelMetricsGenerator(TestCase):
 
 
     def test_print_metrics(self):
-        results = {'test_accuracy': [1, 2, 3]}
+        results = {'test_accuracy': [1, 2, 3], 'fit_time': [0.00212, 0.34455, 2.3234]}
         printer = CrossValidationMetricsResultPrinter()
         printer.print_metrics(results)
 

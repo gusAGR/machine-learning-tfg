@@ -37,36 +37,33 @@ class ModelMetricsGenerator:
         self.print_specifity()
         self.print_f2_score()
 
-
-    def print_accuracy(self):
-        # print(self._test_truth.shape)
-        # print(self._predicted.shape)
-        accuracy = accuracy_score(self._test_truth, self._predicted, normalize=True)
-        print(f'Accuracy: {accuracy}')
-
-    def print_precision(self):
-        precision = precision_score(self._test_truth, self._predicted)
-        print(f'Precision: {precision}')
-
-    def print_recall(self):
-        recall = recall_score(self._test_truth, self._predicted)
-        print(f'Recall: {recall}')
-
-    def print_specifity(self):
-        specifity = recall_score(self._test_truth, self._predicted, pos_label=0)
-        print(f'Specifity: {specifity}')
-
-    def print_f2_score(self):
-        f2_score = fbeta_score(self._test_truth, self._predicted, beta=2)
-        print(f'F2-score: {f2_score}')
-
     def print_fit_time(self):
-        fit_time_in_seconds = round(self._fit_time, 6)
-        print(f'Fit time: {fit_time_in_seconds} seconds.')
+        fit_time_in_seconds = round(self._fit_time, 4)
+        print(f'\nFit time: {fit_time_in_seconds} segundos.')
 
     def print_predict_time(self):
-        predict_time_in_seconds = round(self._predict_time, 6)
-        print(f'Predict time: {predict_time_in_seconds} seconds.')
+        predict_time_in_seconds = round(self._predict_time, 4)
+        print(f'Predict time: {predict_time_in_seconds} segundos.')
+
+    def print_accuracy(self):
+        accuracy = round(accuracy_score(self._test_truth, self._predicted, normalize=True) * 100, 2)
+        print(f'Accuracy: {accuracy}%.')
+
+    def print_precision(self):
+        precision = round(precision_score(self._test_truth, self._predicted) * 100, 2)
+        print(f'Precision: {precision}%.')
+
+    def print_recall(self):
+        recall = round(recall_score(self._test_truth, self._predicted) * 100, 2)
+        print(f'Recall: {recall}%.')
+
+    def print_specifity(self):
+        specifity = round(recall_score(self._test_truth, self._predicted, pos_label=0) * 100, 2)
+        print(f'Specificity: {specifity}%.')
+
+    def print_f2_score(self):
+        f2_score = round(fbeta_score(self._test_truth, self._predicted, beta=2) * 100, 2)
+        print(f'F2-score: {f2_score}%.')
 
     def print_confusion_matrix(self):
         print(f'Confusion matrix:\n {confusion_matrix(self._test_truth, self._predicted)}')

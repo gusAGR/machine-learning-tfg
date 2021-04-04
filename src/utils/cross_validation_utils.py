@@ -1,8 +1,11 @@
 import numpy as np
+
+
 class CrossValidationMetricsResultPrinter:
     """ Prints mean values of metrics obtained by a cross validation process.
 
     """
+
     def __init__(self, descriptions=None):
         """
 
@@ -10,13 +13,13 @@ class CrossValidationMetricsResultPrinter:
         """
         if descriptions is None:
             self.descriptions = {
-                'fit_time': 'Fit time',
-                'score_time': 'Test time',
-                'test_accuracy': 'Accuracy',
-                'test_precision': 'Precision',
-                'test_recall': 'Recall',
-                'test_specifity': 'Specifity',
-                'test_f2_score': 'F2 score'
+                'fit_time': 'Fit time {0} segundos.',
+                'score_time': 'Test time {0} segundos',
+                'test_accuracy': 'Accuracy {0}%.',
+                'test_precision': 'Precision {0}%.',
+                'test_recall': 'Recall {0}%.',
+                'test_specifity': 'Specificity {0}%.',
+                'test_f2_score': 'F2 score {0}%.'
             }
         else:
             self.descriptions = descriptions
@@ -29,8 +32,13 @@ class CrossValidationMetricsResultPrinter:
         """
         print(f'\nValores medios:')
         for metric, values in metrics.items():
-            metric_description = self.descriptions.get(metric, 'Métrica sin definir')
-            mean = np.asarray(values).mean()
-            print(f'\t{metric_description}  : {mean}.')
+            metric_description = self.descriptions.get(metric, 'Métrica sin definir {0}.')
+            mean = None
+            if self._is_time_metric(metric_description):
+                mean = round(np.asarray(values).mean(), 4)
+            else:
+                mean = round(np.asarray(values).mean() * 100, 2)
+            print('\t' + metric_description.format(mean))
 
-
+    def _is_time_metric(self, metric_description):
+        return metric_description.find('time') != -1
