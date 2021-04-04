@@ -29,13 +29,14 @@ class ModelMetricsGenerator:
         # self.print_confusion_matrix()
 
     def print_metrics(self):
+        self.print_fit_time()
+        self.print_predict_time()
         self.print_accuracy()
         self.print_precision()
         self.print_recall()
         self.print_specifity()
         self.print_f2_score()
-        self.print_fit_time()
-        self.print_predict_time()
+
 
     def print_accuracy(self):
         # print(self._test_truth.shape)
