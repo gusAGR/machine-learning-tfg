@@ -39,11 +39,11 @@ class ModelMetricsGenerator:
 
     def print_fit_time(self):
         fit_time_in_seconds = round(self._fit_time, 4)
-        print(f'\nFit time: {fit_time_in_seconds} segundos.')
+        print(f'\nFit time: {fit_time_in_seconds}s.')
 
     def print_predict_time(self):
         predict_time_in_seconds = round(self._predict_time, 4)
-        print(f'Predict time: {predict_time_in_seconds} segundos.')
+        print(f'Predict time: {predict_time_in_seconds}s.')
 
     def print_accuracy(self):
         accuracy = round(accuracy_score(self._test_truth, self._predicted, normalize=True) * 100, 2)

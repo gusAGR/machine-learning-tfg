@@ -13,13 +13,13 @@ class CrossValidationMetricsResultPrinter:
         """
         if descriptions is None:
             self.descriptions = {
-                'fit_time': 'Fit time {0} segundos.',
-                'score_time': 'Test time {0} segundos',
-                'test_accuracy': 'Accuracy {0}%.',
+                'fit_time': 'Fit time: {0}s.',
+                'score_time': 'Test time: {0}s',
+                'test_accuracy': 'Accuracy: {0}%.',
                 'test_precision': 'Precision {0}%.',
-                'test_recall': 'Recall {0}%.',
+                'test_recall': 'Recall: {0}%.',
                 'test_specifity': 'Specificity {0}%.',
-                'test_f2_score': 'F2 score {0}%.'
+                'test_f2_score': 'F2 score: {0}%.'
             }
         else:
             self.descriptions = descriptions
@@ -32,7 +32,7 @@ class CrossValidationMetricsResultPrinter:
         """
         print(f'\nValores medios:')
         for metric, values in metrics.items():
-            metric_description = self.descriptions.get(metric, 'Métrica sin definir {0}.')
+            metric_description = self.descriptions.get(metric, 'Métrica sin definir: {0}.')
             mean = None
             if self._is_time_metric(metric_description):
                 mean = round(np.asarray(values).mean(), 4)
