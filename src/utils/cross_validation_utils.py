@@ -16,19 +16,31 @@ class CrossValidationMetricsResultPrinter:
                 'fit_time': 'Fit time: {0}s.',
                 'score_time': 'Test time: {0}s',
                 'test_accuracy': 'Accuracy: {0}%.',
-                'test_precision': 'Precision {0}%.',
+                'test_precision': 'Precision: {0}%.',
                 'test_recall': 'Recall: {0}%.',
-                'test_specifity': 'Specificity {0}%.',
+                'test_specifity': 'Specificity: {0}%.',
                 'test_f2_score': 'F2 score: {0}%.'
             }
         else:
             self.descriptions = descriptions
 
-    def print_metrics(self, metrics):
+    def print_metrics_values(self, metrics):
+        """ Print metric mean values obatined by a cross_validation procedure
+
+        :param metrics: dictionary of metrics values
+        """
+        print('\n')
+        for metric, values in metrics.items():
+            if self._is_time_metric(metric):
+                mean = round(np.asarray(values).mean(), 4)
+            else:
+                mean = round(np.asarray(values).mean() * 100, 2)
+            print(mean)
+
+    def print_metrics_report(self, metrics):
         """ Print metric names and its mean values obatined by a cross_validation procedure
 
         :param metrics: dictionary of metrics values
-
         """
         print(f'\nValores medios:')
         for metric, values in metrics.items():
