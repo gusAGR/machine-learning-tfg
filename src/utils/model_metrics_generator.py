@@ -67,3 +67,4 @@ class ModelMetricsGenerator:
 
     def print_confusion_matrix(self):
         print(f'Confusion matrix:\n {confusion_matrix(self._test_truth, self._predicted)}')
+
