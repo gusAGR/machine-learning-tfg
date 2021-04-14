@@ -24,19 +24,6 @@ class CrossValidationMetricsResultPrinter:
         else:
             self.descriptions = descriptions
 
-    def print_metrics_values(self, metrics):
-        """ Print metric mean values obatined by a cross_validation procedure
-
-        :param metrics: dictionary of metrics values
-        """
-        print('\n')
-        for metric, values in metrics.items():
-            if self._is_time_metric(metric):
-                mean = round(np.asarray(values).mean(), 4)
-            else:
-                mean = round(np.asarray(values).mean() * 100, 2)
-            print(mean)
-
     def print_metrics_report(self, metrics):
         """ Print metric names and its mean values obatined by a cross_validation procedure
 
@@ -52,5 +39,20 @@ class CrossValidationMetricsResultPrinter:
                 mean = round(np.asarray(values).mean() * 100, 2)
             print('\t' + metric_description.format(mean))
 
+        self.print_metrics_values(metrics)
+
     def _is_time_metric(self, metric_description):
         return metric_description.find('time') != -1
+
+    def print_metrics_values(self, metrics):
+        """ Print metric mean values obatined by a cross_validation procedure
+
+        :param metrics: dictionary of metrics values
+        """
+        print('\n')
+        for metric, values in metrics.items():
+            if self._is_time_metric(metric):
+                mean = round(np.asarray(values).mean(), 4)
+            else:
+                mean = round(np.asarray(values).mean() * 100, 2)
+            print(mean)
