@@ -7,19 +7,20 @@ import time
 
 class ModelMetricsGenerator:
 
-    def __init__(self, test_truth):
+    def __init__(self, test_data, test_truth):
+        self._test_data = test_data
         self._test_truth = np.asarray(test_truth)
         self._predicted = 0
         self._fit_time = 0
         self._predict_time = 0
 
-    def generate_metrics(self, model, train_data, train_truth, test_data):
+    def generate_metrics(self, model, train_data, train_truth):
         fit_start_time = time.time()
         model.fit(train_data, train_truth)
         self._fit_time = time.time() - fit_start_time
 
         predict_start_time = time.time()
-        self._predicted = np.asarray(model.predict(test_data))
+        self._predicted = np.asarray(model.predict(self._test_data))
         self._predict_time = time.time() - predict_start_time
 
         return model
