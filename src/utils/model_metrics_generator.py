@@ -19,6 +19,7 @@ class ModelMetricsGenerator:
         model.fit(train_data, train_truth)
         self._fit_time = time.time() - fit_start_time
 
+
         predict_start_time = time.time()
         self._predicted = np.asarray(model.predict(self._test_data))
         self._predict_time = time.time() - predict_start_time
@@ -30,42 +31,40 @@ class ModelMetricsGenerator:
         # self.print_confusion_matrix()
 
     def print_metrics(self):
-        self.print_fit_time()
-        self.print_predict_time()
-        self.print_accuracy()
-        self.print_precision()
-        self.print_recall()
-        self.print_specifity()
-        self.print_f2_score()
+        print('\n Indicadores rendimiento:')
+        print(f'Fit time: {self.get_fit_time()}')
+        print(f'Predict time: {self.get_predict_time()}')
+        print(f'Accuracy: {self.get_accuracy_percentage()}')
+        print(f'Precision: {self.get_precision_percentage()}')
+        print(f'Recall: {self.get_recall_percentage()}')
+        print(f'Specificity: {self.get_specifity_percentage()}')
+        print(f'F2-score: {self.get_f2_score_percentage()}')
+        print('\n')
+        print(self.get_fit_time())
+        print(self.get_predict_time())
+        print(self.get_accuracy_percentage())
+        print(self.get_precision_percentage())
+        print(self.get_recall_percentage())
+        print(self.get_specifity_percentage())
+        print(self.get_f2_score_percentage())
 
-    def print_fit_time(self):
-        fit_time_in_seconds = round(self._fit_time, 4)
-        print(f'\nFit time: {fit_time_in_seconds}s.')
+    def get_fit_time(self):
+        return round(self._fit_time, 4)
 
-    def print_predict_time(self):
-        predict_time_in_seconds = round(self._predict_time, 4)
-        print(f'Predict time: {predict_time_in_seconds}s.')
+    def get_predict_time(self):
+        return round(self._predict_time, 4)
 
-    def print_accuracy(self):
-        accuracy = round(accuracy_score(self._test_truth, self._predicted, normalize=True) * 100, 2)
-        print(f'Accuracy: {accuracy}%.')
+    def get_accuracy_percentage(self):
+        return round(accuracy_score(self._test_truth, self._predicted, normalize=True) * 100, 2)
 
-    def print_precision(self):
-        precision = round(precision_score(self._test_truth, self._predicted) * 100, 2)
-        print(f'Precision: {precision}%.')
+    def get_precision_percentage(self):
+        return round(precision_score(self._test_truth, self._predicted) * 100, 2)
 
-    def print_recall(self):
-        recall = round(recall_score(self._test_truth, self._predicted) * 100, 2)
-        print(f'Recall: {recall}%.')
+    def get_recall_percentage(self):
+        return round(recall_score(self._test_truth, self._predicted) * 100, 2)
 
-    def print_specifity(self):
-        specifity = round(recall_score(self._test_truth, self._predicted, pos_label=0) * 100, 2)
-        print(f'Specificity: {specifity}%.')
+    def get_specifity_percentage(self):
+        return round(recall_score(self._test_truth, self._predicted, pos_label=0) * 100, 2)
 
-    def print_f2_score(self):
-        f2_score = round(fbeta_score(self._test_truth, self._predicted, beta=2) * 100, 2)
-        print(f'F2-score: {f2_score}%.')
-
-    def print_confusion_matrix(self):
-        print(f'Confusion matrix:\n {confusion_matrix(self._test_truth, self._predicted)}')
-
+    def get_f2_score_percentage(self):
+        return round(fbeta_score(self._test_truth, self._predicted, beta=2) * 100, 2)
