@@ -6,25 +6,42 @@ import time
 
 
 class ModelMetricsGenerator:
+    """ Obtiene las valores para las métricas definidas en el trabajo generadas por un modelo
 
-    def __init__(self, test_data, test_truth):
-        self._test_data = test_data
-        self._test_truth = np.asarray(test_truth)
+    """
+
+    def __init__(self, model, test_truth=None):
+        """ Constructor
+
+        :param model:  model that it will generate metrics measures.
+        :param test_truth: sequence values for validation.
+        """
+        self._test_truth = test_truth
+        self._model = model
         self._predicted = 0
         self._fit_time = 0
         self._predict_time = 0
 
-    def generate_metrics(self, model, train_data, train_truth):
+    def fit_and_predict_model(self, train_data, train_truth, test_data):
+
+        self.fit_model(train_data, train_truth)
+        self.predict_model(test_data)
+
+        return self._model
+
+    def fit_model(self, train_data, train_truth):
         fit_start_time = time.time()
-        model.fit(train_data, train_truth)
+        self._model.fit(train_data, train_truth)
         self._fit_time = time.time() - fit_start_time
 
+        return self._model
 
+    def predict_model(self, test_data):
         predict_start_time = time.time()
-        self._predicted = np.asarray(model.predict(self._test_data))
+        self._predicted = np.asarray(self._model.predict(test_data))
         self._predict_time = time.time() - predict_start_time
 
-        return model
+        return self._model
 
     def print_results(self):
         self.print_metrics()

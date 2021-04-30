@@ -32,9 +32,8 @@ class CrossValidationMetricsResultPrinter:
         print(f'\nValores medios:')
         for metric, values in metrics.items():
             metric_description = self.descriptions.get(metric, 'Métrica sin definir: {0}')
-            mean = None
             if self._is_time_metric(metric_description):
-                mean = round(np.asarray(values).mean(), 4)
+                metric_mean_percentage = round(np.asarray(values).mean(), 4)
             else:
                 metric_mean_percentage = round(np.asarray(values).mean() * 100, 2)
             print('\t' + metric_description.format(metric_mean_percentage))
@@ -52,7 +51,7 @@ class CrossValidationMetricsResultPrinter:
         print('\n')
         for metric, values in metrics.items():
             if self._is_time_metric(metric):
-                mean = round(np.asarray(values).mean(), 4)
+                metric_mean_percentage = round(np.asarray(values).mean(), 4)
             else:
                 metric_mean_percentage = round(np.asarray(values).mean() * 100, 2)
             print(metric_mean_percentage)

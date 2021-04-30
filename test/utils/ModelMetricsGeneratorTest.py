@@ -22,8 +22,8 @@ class TestModelMetricsGenerator(TestCase):
         test_truth = pd.DataFrame({'truth': [0, 1, 0]})
 
         model = svm.LinearSVC()
-        metric_generator = ModelMetricsGenerator(test_data, test_truth)
-        metric_generator.generate_metrics(model, train_data, train_truth)
+        metric_generator = ModelMetricsGenerator(model, test_truth)
+        metric_generator.fit_and_predict_model(train_data, train_truth, test_data)
 
         metric_generator.print_results()
 
@@ -34,8 +34,8 @@ class TestModelMetricsGenerator(TestCase):
         train_data, test_data, train_truth, test_truth = train_test_split(sample_data, ground_truth, test_size=0.2, shuffle=True)
 
         model = svm.LinearSVC()
-        metric_generator = ModelMetricsGenerator(test_data, test_truth)
-        metric_generator.generate_metrics(model, train_data, train_truth)
+        metric_generator = ModelMetricsGenerator(model, test_truth)
+        metric_generator.fit_and_predict_model( train_data, train_truth, test_data)
 
         metric_generator.print_results()
 
