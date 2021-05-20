@@ -28,6 +28,6 @@ def perform_grid_search(build_function, param_grid, train_data, train_truth):
     model = KerasClassifier(build_fn=build_function, verbose=0)
     sskfold = StratifiedShuffleSplit(random_state=1)
     scoring = accuracy_precision_recall_specifity_f2_score()
-    grid = GridSearchCV(estimator=model, param_grid=param_grid, cv=sskfold, scoring=scoring, refit='f2_score', n_jobs=4)
+    grid = GridSearchCV(estimator=model, param_grid=param_grid, cv=sskfold, scoring=scoring, refit='recall', n_jobs=-1)
     grid_result = grid.fit(train_data, train_truth)
     return grid_result
