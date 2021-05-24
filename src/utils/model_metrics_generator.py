@@ -18,7 +18,7 @@ class ModelMetricsGenerator:
         """
         self._test_truth = test_truth
         self._model = model
-        self._predicted = 0
+        self.predicted = 0
         self._fit_time = 0
         self._predict_time = 0
 
@@ -38,7 +38,7 @@ class ModelMetricsGenerator:
 
     def predict_model(self, test_data):
         predict_start_time = time.time()
-        self._predicted = np.asarray(self._model.predict(test_data))
+        self.predicted = np.asarray(self._model.predict(test_data))
         self._predict_time = time.time() - predict_start_time
 
         return self._model
@@ -72,16 +72,16 @@ class ModelMetricsGenerator:
         return round(self._predict_time, 4)
 
     def get_accuracy_percentage(self):
-        return round(accuracy_score(self._test_truth, self._predicted, normalize=True) * 100, 2)
+        return round(accuracy_score(self._test_truth, self.predicted, normalize=True) * 100, 2)
 
     def get_precision_percentage(self):
-        return round(precision_score(self._test_truth, self._predicted) * 100, 2)
+        return round(precision_score(self._test_truth, self.predicted) * 100, 2)
 
     def get_recall_percentage(self):
-        return round(recall_score(self._test_truth, self._predicted) * 100, 2)
+        return round(recall_score(self._test_truth, self.predicted) * 100, 2)
 
     def get_specifity_percentage(self):
-        return round(recall_score(self._test_truth, self._predicted, pos_label=0) * 100, 2)
+        return round(recall_score(self._test_truth, self.predicted, pos_label=0) * 100, 2)
 
     def get_f2_score_percentage(self):
-        return round(fbeta_score(self._test_truth, self._predicted, beta=2) * 100, 2)
+        return round(fbeta_score(self._test_truth, self.predicted, beta=2) * 100, 2)

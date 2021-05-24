@@ -12,9 +12,6 @@ from src.utils.model_metrics_generator import ModelMetricsGenerator
 
 class TestModelMetricsGenerator(TestCase):
 
-    def setUp(self):
-        pass
-
     def test_output(self):
         train_data = pd.DataFrame({'feature1': [1, 2, 3], 'feature2': [4, 5, 6]})
         train_truth = pd.DataFrame({'truth': [0, 1, 0]})
