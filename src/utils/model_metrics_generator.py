@@ -4,7 +4,7 @@ import time
 
 
 class ModelMetricsGenerator:
-    """ Obtiene las indicadores de rendimiento de un modelo para las métricas definidas.
+    """ Encapsulate model training and evaluation and allows to obtain the values of the defined metrics for assessing model performance.
 
     """
 
@@ -12,8 +12,9 @@ class ModelMetricsGenerator:
         """ Constructor
 
         :param model:  model that it will generate metrics measures.
-        :param test_truth: sequence values for validation.
+        :param test_truth: ground truth of test dataset.
         """
+
         self._test_truth = test_truth
         self._model = model
         self.predicted = 0

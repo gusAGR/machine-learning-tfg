@@ -2,7 +2,7 @@ from sklearn.metrics import make_scorer, fbeta_score, recall_score
 
 
 def accuracy_precision_recall_specifity_f2_score():
-    """
+    """ Returns a dictionary with the defined metrics that will be used in the work.
 
     :return:
     """

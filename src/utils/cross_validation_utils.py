@@ -7,9 +7,9 @@ class CrossValidationMetricsResultPrinter:
     """
 
     def print_metrics_report(self, metrics):
-        """ Print metric names and its mean values obatined by a cross_validation procedure
+        """ Print metric names and its mean values obatined by a cross_validation procedure.
 
-        :param metrics: dictionary of metrics values
+        :param metrics: dictionary of metrics values.
         """
         print(f'\nValores medios:')
         for key, values in metrics.items():
@@ -25,10 +25,11 @@ class CrossValidationMetricsResultPrinter:
         return metric_description.find('time') != -1
 
     def print_metrics_values(self, metrics):
-        """ Print metric mean values obatined by a cross_validation procedure
+        """ Print metric mean values obatined by a cross_validation procedure.
 
-        :param metrics: dictionary of metrics values
+        :param metrics: dictionary with the values for each metric.
         """
+
         print('\n')
         for metric, values in metrics.items():
             if self._is_time_metric(metric):

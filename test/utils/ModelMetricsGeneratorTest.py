@@ -2,13 +2,12 @@ import unittest
 from unittest import TestCase
 import pandas as pd
 from sklearn import svm
-from sklearn.model_selection import train_test_split
 from src.utils.model_metrics_generator import ModelMetricsGenerator
 
 
 class TestModelMetricsGenerator(TestCase):
 
-    def test_output(self):
+    def test_should_generate_metrics(self):
         train_data = pd.DataFrame({'feature1': [1, 2, 3], 'feature2': [4, 5, 6]})
         train_truth = pd.DataFrame({'truth': [0, 1, 0]})
         test_data = pd.DataFrame({'feature1': [1, 4, 3], 'feature2': [4, 9, 6]})
@@ -17,19 +16,6 @@ class TestModelMetricsGenerator(TestCase):
         model = svm.LinearSVC()
         metric_generator = ModelMetricsGenerator(model, test_truth)
         metric_generator.fit_and_predict_model(train_data, train_truth, test_data)
-
-        self.assertTrue(len(metric_generator.predicted) > 0)
-        self.assertTrue(metric_generator.get_accuracy_percentage() > 0)
-
-    def test_output_with_real_dataset(self):
-        input_data = pd.read_excel('./../../data/prepared/prepared_ICU_Prediction.xlsx')
-        ground_truth = input_data['ICU']
-        sample_data = input_data.drop('ICU', axis=1)
-        train_data, test_data, train_truth, test_truth = train_test_split(sample_data, ground_truth, test_size=0.2, shuffle=True)
-
-        model = svm.LinearSVC()
-        metric_generator = ModelMetricsGenerator(model, test_truth)
-        metric_generator.fit_and_predict_model( train_data, train_truth, test_data)
 
         self.assertTrue(len(metric_generator.predicted) > 0)
         self.assertTrue(metric_generator.get_accuracy_percentage() > 0)
