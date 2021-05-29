@@ -17,7 +17,6 @@ class MyTestCase(unittest.TestCase):
         layers_number = [1, 2, 3, 4, 5]
         batch_size = [64, 128, 256, 512]
         epochs = [64, 256, 512, 768]
-
         param_grid = dict(neurons=neurons, layers_number=layers_number, batch_size=batch_size, epochs=epochs, num_features=[num_features])
 
         grid_result = kgs.perform_grid_search(kgs.build_fn, param_grid, train_data, train_truth)

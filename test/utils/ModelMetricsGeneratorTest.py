@@ -3,10 +3,6 @@ from unittest import TestCase
 import pandas as pd
 from sklearn import svm
 from sklearn.model_selection import train_test_split
-from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.python.keras.wrappers.scikit_learn import KerasClassifier
-import matplotlib.pyplot as plt
 from src.utils.model_metrics_generator import ModelMetricsGenerator
 
 
@@ -22,7 +18,8 @@ class TestModelMetricsGenerator(TestCase):
         metric_generator = ModelMetricsGenerator(model, test_truth)
         metric_generator.fit_and_predict_model(train_data, train_truth, test_data)
 
-        metric_generator.print_results()
+        self.assertTrue(len(metric_generator.predicted) > 0)
+        self.assertTrue(metric_generator.get_accuracy_percentage() > 0)
 
     def test_output_with_real_dataset(self):
         input_data = pd.read_excel('./../../data/prepared/prepared_ICU_Prediction.xlsx')
@@ -34,7 +31,8 @@ class TestModelMetricsGenerator(TestCase):
         metric_generator = ModelMetricsGenerator(model, test_truth)
         metric_generator.fit_and_predict_model( train_data, train_truth, test_data)
 
-        metric_generator.print_results()
+        self.assertTrue(len(metric_generator.predicted) > 0)
+        self.assertTrue(metric_generator.get_accuracy_percentage() > 0)
 
     if __name__ == '__main__':
         unittest.main()
