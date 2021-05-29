@@ -1,12 +1,10 @@
-import pandas as pd
 import numpy as np
-from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score, fbeta_score
-import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score, recall_score, precision_score, fbeta_score
 import time
 
 
 class ModelMetricsGenerator:
-    """ Obtiene las valores para las métricas definidas en el trabajo generadas por un modelo
+    """ Obtiene las indicadores de rendimiento de un modelo para las métricas definidas.
 
     """
 
@@ -23,7 +21,6 @@ class ModelMetricsGenerator:
         self._predict_time = 0
 
     def fit_and_predict_model(self, train_data, train_truth, test_data):
-
         self.fit_model(train_data, train_truth)
         self.predict_model(test_data)
 
